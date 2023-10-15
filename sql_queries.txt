@@ -1,0 +1,35 @@
+User table --->:
+
+CREATE TABLE users (
+    user_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_first_name VARCHAR(50) NOT NULL,
+    user_last_name VARCHAR(50) NOT NULL,
+    user_phone VARCHAR(30) UNIQUE NOT NULL,
+    user_password VARCHAR(2048) NOT NULL,
+    user_created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    user_updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    role VARCHAR(10) DEFAULT 'user'
+);
+
+CREATE TABLE artists (
+    artist_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    artist_first_name VARCHAR(255) NOT NULL,
+    artist_last_name VARCHAR(255) NOT NULL,
+    artist_stage_name VARCHAR(255),
+    artist_phone VARCHAR(255) UNIQUE NOT NULL,
+    artist_password VARCHAR(2048) NOT NULL,
+    artist_id_card VARCHAR(2048) NOT NULL,
+    artist_bio VARCHAR(2048),
+    artist_category VARCHAR(255) CHECK (artist_category IN ('religion', 'non-religion')) NOT NULL,
+    artist_image_url VARCHAR(2048),
+    artist_created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    artist_updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    role VARCHAR(10) DEFAULT 'artist'
+);
+
+CREATE TABLE admins (
+    admin_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    admin_phone VARCHAR(30) UNIQUE NOT NULL,
+    admin_password VARCHAR(2048) NOT NULL,
+    role VARCHAR(10) DEFAULT 'admin'
+);
